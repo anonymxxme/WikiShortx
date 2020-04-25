@@ -27,6 +27,15 @@ def strip_tags(value):
 	return re.sub(r'<[^>]*?>', '', force_unicode(value))
 
 #-----------00000000000000000
+print("\n")
+print("  VA            .AIIIA `YA    A7 ")
+print("  `VA           II'  IV `YA  A7  ")
+print("   `VA    A    A`IIo.    `YA7'   ") 
+print("    `YA  AXA 'A7' `YIA.  .A7YA.  ")
+print("     `VAA7'YAA7'AA   XD .A7  YA. ")
+print("       V7  `V7  `VIII7'.A7    YA.") 
+                                
+                                
 
 #Introduction
 print ("\n= WikiShortx","="*46," \n")
@@ -42,8 +51,8 @@ if (connect()):
     contx=1
 else:
     print("  Device isn't connected to Internet ... ")
-    print("  Program requires Internet connection for functioning. Switch it on before going ahead.")
-    contx=0
+    print("  WARNING: Program requires Internet Connection to function. ")
+    contx=7
 
 #Getting the input
 term= input("\n  Input the valid term you want to search= ")
@@ -57,7 +66,7 @@ try:
 	fx = urllib.request.urlopen(xite)
 	mybytes = fx.read()
 except:
-	print("\n  Enter a valid term to search.")
+	print("\n  Enter a valid term to search \n  and/or \n  Check your Internet connection.")
 	contx=0
 
 if (contx==1):
@@ -86,38 +95,17 @@ if (contx==1):
 	mystr = mystr.split('\n',5)[-1]
 	rx=''
 	new= "\n"
+	
+	#Removing lines with specific substrings
 	spixted= mystr.splitlines()
 	for i in range (len(spixted)):
-		if('parser' in spixted[i]):
+		if('parser' in spixted[i] or 'For other uses' in spixted[i] or 'directs here' in spixted[i] or 'This article' in spixted[i] or '&amp' in spixted[i] or 'appropriate' in spixted[i] or '•' in spixted[i] or '^' in spixted[i]):
 			rx= rx
 		else:
 			rx= rx+new+spixted[i]			
 	mystr= rx
 	rx=''
-	spixted= mystr.splitlines()
-	for i in range (len(spixted)):
-		if('This article' in spixted[i]):
-			rx= rx
-		else:
-			rx= rx+new+spixted[i]			
-	mystr= rx
-	rx=''
-	spixted= mystr.splitlines()
-	for i in range (len(spixted)):
-		if('For other uses' in spixted[i]):
-			rx= rx
-		else:
-			rx= rx+new+spixted[i]
-	mystr= rx
-	rx=''
-	spixted= mystr.splitlines()
-	for i in range (len(spixted)):
-		if('edirects here' in spixted[i]):
-			rx= rx
-		else:
-			rx= rx+new+spixted[i]
-	mystr= rx
-	rx=''
+
 	spixted= mystr.splitlines()
 	for i in range (len(spixted)):
 		lex= len(spixted[i])
@@ -127,31 +115,7 @@ if (contx==1):
 			rx= rx+new+spixted[i]
 	mystr= rx
 	rx=''
-	spixted= mystr.splitlines()
-	for i in range (len(spixted)):
-		if('•' in spixted[i]):
-			rx= rx
-		else:
-			rx= rx+new+spixted[i]
-	mystr= rx
-	rx=''
-	spixted= mystr.splitlines()
-	for i in range (len(spixted)):
-		if('^' in spixted[i]):
-			rx= rx
-		else:
-			rx= rx+new+spixted[i]
-	mystr= rx
-	rx=''
-	spixted= mystr.splitlines()
-	for i in range (len(spixted)):
-		if('&amp' in spixted[i]):
-			rx= rx
-		else:
-			rx= rx+new+spixted[i]
-	mystr= rx
-	rx=''	
-
+	
 	#Removing CSS traces
 	mystr = re.sub(r'\([^)]*\)', '', mystr)	
 	mystr = mystr.replace('&#160;',' ')
@@ -259,11 +223,16 @@ if (contx==1):
 			print("  Error, try other term.")
 	print(mystr)
 else:
-    print("Program ended.")
+	print("  Program ended.\n")
+	mystr='null'
+	
+print("="*59)
+
+print("  WikiShortx ")
 
 print("="*59)
 
-x=input("\n  Do you want to save this information as a txt file? (y/n)")
+x=input("\n  Do you want to save this as a txt file? (y/n)")
 x=x.lower()
 termu=term.upper()
 if (x=='y'):
@@ -272,12 +241,13 @@ if (x=='y'):
 	fdt= termu+'\n\n'+mystr
 	f.write(fdt)
 	f.close()
-	print("File saved successfully...")
-	print("Press enter to end program ...")
+	print("  File saved successfully ... ")
+	print("\n  Press enter to end program ...\n")
+	print("= XXXXXXXXXXX","="*46)
 	ix= input()
 
 else:
-	print("Press enter to end program ...")
+	print("\n  Press enter to end program ...\n")
+	print("= XXXXXXXXXXX","="*46)
 	ix= input()
-
-#WikiShortx - A python based program for downloading information from Wikipedia
+#WikiShortx - A python based program for downloading information from Wikipedia.
