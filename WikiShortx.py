@@ -27,15 +27,14 @@ def strip_tags(value):
 	return re.sub(r'<[^>]*?>', '', force_unicode(value))
 
 #-----------00000000000000000
+
 print("\n")
-print("  VA            .AIIIA `YA    A7 ")
+print(" `VA            .AIIIA `YA    A7 ")
 print("  `VA           II'  IV `YA  A7  ")
-print("   `VA    A    A`IIo.    `YA7'   ") 
-print("    `YA  AXA 'A7' `YIA.  .A7YA.  ")
-print("     `VAA7'YAA7'AA   XD .A7  YA. ")
+print("   `VA    A    A`VIo.    `YA7'   ") 
+print("    `YA  AXA  A7  `YIA.  .A7YA.  ")
+print("     `VAA7'YAA7 AA   XD .A7  YA. ")
 print("       V7  `V7  `VIII7'.A7    YA.") 
-                                
-                                
 
 #Introduction
 print ("\n= WikiShortx","="*46," \n")
@@ -56,7 +55,6 @@ else:
 
 #Getting the input
 term= input("\n  Input the valid term you want to search= ")
-
 domain= 'https://en.wikipedia.com/wiki/'
 xite=domain+term
 
@@ -77,7 +75,6 @@ if (contx==1):
 	mybytes = fp.read()
 	mystr = mybytes.decode("utf8")
 	fp.close()
-	
 	print("  Organizing data ... ")
 	
 	#Removing scripts from data using regex 
@@ -99,13 +96,12 @@ if (contx==1):
 	#Removing lines with specific substrings
 	spixted= mystr.splitlines()
 	for i in range (len(spixted)):
-		if('parser' in spixted[i] or 'For other uses' in spixted[i] or 'directs here' in spixted[i] or 'This article' in spixted[i] or '&amp' in spixted[i] or 'appropriate' in spixted[i] or '•' in spixted[i] or '^' in spixted[i]):
+		if('parser' in spixted[i] or 'For other uses' in spixted[i] or 'directs here' in spixted[i] or 'This article' in spixted[i] or '&amp' in spixted[i] or 'appropriate' in spixted[i] or '•' in spixted[i] or 'Disambiguation' in spixted[i] or '^' in spixted[i]):
 			rx= rx
 		else:
 			rx= rx+new+spixted[i]			
 	mystr= rx
 	rx=''
-
 	spixted= mystr.splitlines()
 	for i in range (len(spixted)):
 		lex= len(spixted[i])
@@ -129,14 +125,12 @@ if (contx==1):
 		z=' '+str(i)+' '
 		mystr = mystr.replace(z,' ')
 		
-	#Optimising text readability
+	#Optimizing text readability
 	mystr = mystr.replace('; ','')
 	mystr = mystr.replace(' , ',', ')
 	mystr = mystr.replace(' . ','. ')
-
 	mystr = mystr.replace('  ',' ')
 	mystr = mystr.replace('   ',' ')
-
 	mystr = mystr.replace('&#xfeff;',' ')
 	pax=2
 	
@@ -155,24 +149,22 @@ if (contx==1):
 					pax=0
 		if(pax==0):
 			rx=rx
-			pax=1
+			pax=1 		
 		else:
-			rx=rx+new+spixted[i]
-		
+			rx=rx+new+spixted[i]		
 	mystr=rx	
 	rx=''	
 	
-	#Giving final touches													
+	#Giving final touches
+	print("  Giving final touches ...")													
 	mystr = mystr.split('\n',0)[-1]
-	spixted= mystr.splitlines()
+	spixted= mystr.splitlines()	
 	try:
 		for i in range (10):
-			rx= rx+new+spixted[i]
+			rx= rx+new+spixted[i]			
 	except:
 		for i in range (len(spixted)):
-			rx= rx+new+spixted[i]
-
-		
+			rx= rx+new+spixted[i]	
 	mystr= rx
 	rx=''
 	terx=56-len(term)
@@ -184,9 +176,9 @@ if (contx==1):
 	mystr = mystr.replace('  ',' ')
 	mystr = mystr.replace('   ',' ')		
 	spixted= mystr.splitlines()
-	for i in range (len(spixted)):
+	for i in range (len(spixted)):		
 		if('xfeff' in spixted[i]):
-			rx= rx
+			rx= rx			
 		else:
 			rx= rx+new+spixted[i]
 	mystr= rx
@@ -195,46 +187,40 @@ if (contx==1):
 	#Stripping off empty lines							
 	lines = mystr.split("\n")
 	non_empty_lines = [line for line in lines if line.strip() != ""]
-	string_without_empty_lines = ""
+	string_without_empty_lines = ""	
 	for line in non_empty_lines:
 		string_without_empty_lines += line + "\n"
 	mystr=string_without_empty_lines 
 		
-	#Removing useless information
-	
+	#Removing useless information	
 	if('This page was last edited on' in mystr):
 		spixted= mystr.splitlines()
-		for i in range (len(spixted)):
+		for i in range (len(spixted)):			
 			if('This page was last edited on' in spixted[i]):
 				linx=i
 		mystr= rx
-		rx=''
-		if(linx==0):
-			linx=2
-		if(linx==1):
-			linx=2		
+		rx=''		
 		try:				
 			spixted= mystr.splitlines()
-			for i in range (linx-1):
+			for i in range (2):
 				rx= rx+new+spixted[i]
 			mystr= rx
-			rx=''
+			rx=''			
 		except:
 			print("  Error, try other term.")
 	print(mystr)
+	
 else:
 	print("  Program ended.\n")
 	mystr='null'
 	
 print("="*59)
-
-print("  WikiShortx ")
-
+print("  WikiShortx")
 print("="*59)
-
 x=input("\n  Do you want to save this as a txt file? (y/n)")
 x=x.lower()
 termu=term.upper()
+
 if (x=='y'):
 	fix=term+'.txt'
 	f= open(fix,"w+")
@@ -250,4 +236,4 @@ else:
 	print("\n  Press enter to end program ...\n")
 	print("= XXXXXXXXXXX","="*46)
 	ix= input()
-#WikiShortx - A python based program for downloading information from Wikipedia.
+#WikiShortx - A python based program for downloading information from Wikipedia. 
